@@ -1,0 +1,25 @@
+<% layout('layouts/boilerplate')%>
+<div class="row image"><%=blogpost.image%></div>
+<div class="title row">
+  <h2><%=blogpost.title%></h2>
+  <h4></h4>
+</div>
+<hr />
+<% for(let img of blogpost.images) {%>
+<img src="<%=img.url%>" alt="..." />
+<%}%>
+<div class="content">
+  <p><%=blogpost.content%></p>
+</div>
+<% if( currentUser && blogpost.author.equals(currentUser._id)) {%>
+<div class="container-small">
+  <a class="btn btn-info" href="/board/<%=blogpost._id%>/edit">Edit</a>
+  <form
+    class="d-inline"
+    action="/board/<%=blogpost._id%>?_method=DELETE"
+    method="POST"
+  >
+    <button class="btn btn-danger">Delete</button>
+  </form>
+</div>
+<% } %>
